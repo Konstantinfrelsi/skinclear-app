@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#8B6F5C">
+<meta name="description" content="SkinClear — Dein Weg zu gesunder Haut ohne Cortison">
+<link rel="manifest" href="manifest.json">
+<title>SkinClear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --bg:#F5F0EB;
+  --bg2:#EDE7E0;
+  --bg3:#E5DDD5;
+  --card:#FFFFFF;
+  --card2:#FAF8F5;
+  --primary:#8B6F5C;
+  --primary-light:#B8A394;
+  --primary-bg:rgba(139,111,92,0.08);
+  --primary-border:rgba(139,111,92,0.15);
+  --green:#5A8A6A;
+  --green-light:#7CAE8E;
+  --green-bg:rgba(90,138,106,0.08);
+  --green-border:rgba(90,138,106,0.18);
+  --amber:#C4873B;
+  --amber-bg:rgba(196,135,59,0.08);
+  --amber-border:rgba(196,135,59,0.18);
+  --coral:#C2635A;
+  --coral-bg:rgba(194,99,90,0.06);
+  --coral-border:rgba(194,99,90,0.18);
+  --blue:#6B8DB5;
+  --blue-bg:rgba(107,141,181,0.08);
+  --blue-border:rgba(107,141,181,0.18);
+  --purple:#8E7DA8;
+  --purple-bg:rgba(142,125,168,0.08);
+  --purple-border:rgba(142,125,168,0.18);
+  --text:#2D2A26;
+  --text2:#6B6560;
+  --text3:#9C958E;
+  --shadow:0 2px 12px rgba(45,42,38,0.06);
+  --shadow-lg:0 4px 24px rgba(45,42,38,0.08);
+  --radius:16px;
+  --radius-sm:12px;
+  --nav-h:72px;
+  --font-head:'Manrope',sans-serif;
+  --font-body:'Plus Jakarta Sans',sans-serif;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);color:var(--text);
+  line-height:1.65;overflow-x:hidden;
+  padding-bottom:calc(var(--nav-h) + 24px);
+  min-height:100dvh;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+  border-top:1px solid rgba(139,111,92,0.08);
+  padding:6px 4px calc(env(safe-area-inset-bottom,8px) + 4px);
+  display:flex;justify-content:space-around;align-items:center;
+  box-shadow:0 -4px 30px rgba(45,42,38,0.04);
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:6px 2px;border:none;background:none;
+  color:var(--text3);font-size:10px;font-weight:600;
+  font-family:var(--font-head);cursor:pointer;transition:all 0.25s;
+  min-width:0;flex:1;letter-spacing:0.2px;
+  touch-action:manipulation;
+}
+.nav-item svg{width:22px;height:22px;transition:all 0.25s;stroke-width:1.8}
+.nav-item.active{color:var(--primary)}
+.nav-item.active svg{stroke-width:2.2}
+
+/* ===== PAGES ===== */
+.page{
+  display:none;opacity:0;
+  transform:translateY(8px);
+  padding:0 20px;
+  max-width:560px;margin:0 auto;
+}
+.page.active{
+  display:block;opacity:1;transform:translateY(0);
+  animation:pageIn 0.3s ease;
+}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== HEADER ===== */
+.page-header{padding:28px 0 20px}
+.page-header h1{
+  font-family:var(--font-head);
+  font-size:28px;font-weight:800;
+  letter-spacing:-0.5px;
+  color:var(--primary);
+}
+.page-header p{font-size:14px;color:var(--text2);margin-top:4px;font-weight:400}
+
+/* ===== CARDS ===== */
+.card{
+  background:var(--card);
+  border:none;
+  border-radius:var(--radius);
+  padding:20px;margin-bottom:12px;
+  transition:all 0.2s;
+  box-shadow:var(--shadow);
+}
+.card:active{transform:scale(0.985)}
+.card-sm{padding:16px;border-radius:var(--radius-sm)}
+
+.card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.card-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.card-icon.green{background:var(--green-bg);color:var(--green)}
+.card-icon.amber{background:var(--amber-bg);color:var(--amber)}
+.card-icon.coral{background:var(--coral-bg);color:var(--coral)}
+.card-icon.blue{background:var(--blue-bg);color:var(--blue)}
+.card-icon.purple{background:var(--purple-bg);color:var(--purple)}
+.card-icon.primary{background:var(--primary-bg);color:var(--primary)}
+
+.card-title{font-family:var(--font-head);font-size:16px;font-weight:700;letter-spacing:-0.2px}
+.card-sub{font-size:12.5px;color:var(--text2);margin-top:2px}
+
+/* ===== STATUS PILLS ===== */
+.pill{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px;border-radius:100px;
+  font-size:11px;font-weight:700;letter-spacing:0.3px;
+  font-family:var(--font-head);
+}
+.pill-ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.pill-warn{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
+.pill-bad{background:var(--coral-bg);color:var(--coral);border:1px solid var(--coral-border)}
+.pill-info{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.pill-purple{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)}
+
+/* ===== ALERT BANNERS ===== */
+.alert{
+  padding:16px 18px;border-radius:var(--radius-sm);
+  margin-bottom:12px;font-size:13.5px;line-height:1.6;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.alert-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.alert.blue{background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue)}
+.alert.amber{background:var(--amber-bg);border:1px solid var(--amber-border);color:var(--amber)}
+.alert.coral{background:var(--coral-bg);border:1px solid var(--coral-border);color:var(--coral)}
+.alert.green{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green)}
+.alert strong{font-weight:700}
+
+/* ===== ACCORDION ===== */
+.acc{margin-bottom:10px;border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow)}
+.acc-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 18px;background:var(--card);
+  cursor:pointer;user-select:none;
+  touch-action:manipulation;
+}
+.acc-head h3{
+  font-family:var(--font-head);font-size:15px;font-weight:600;
+  display:flex;align-items:center;gap:10px;flex:1;
+}
+.acc-arrow{
+  font-size:11px;color:var(--text3);
+  transition:transform 0.3s;flex-shrink:0;margin-left:8px;
+  width:28px;height:28px;border-radius:8px;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+}
+.acc.open .acc-arrow{transform:rotate(180deg);background:var(--primary-bg);color:var(--primary)}
+.acc-body{
+  max-height:0;overflow:hidden;
+  transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1),padding 0.3s;
+  background:var(--card2);padding:0 18px;
+}
+.acc.open .acc-body{max-height:3000px;padding:16px 18px}
+
+/* ===== CHECKLIST ===== */
+.checklist{list-style:none}
+.checklist li{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 0;border-bottom:1px solid var(--bg);
+  cursor:pointer;touch-action:manipulation;
+  transition:opacity 0.2s;
+}
+.checklist li:last-child{border-bottom:none}
+.check-box{
+  width:22px;height:22px;border-radius:7px;flex-shrink:0;
+  border:2px solid var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.25s;margin-top:1px;
+}
+.checklist li.done .check-box{
+  background:var(--green);border-color:var(--green);
+  box-shadow:0 2px 8px rgba(90,138,106,0.3);
+}
+.checklist li.done .check-box::after{content:'\2713';color:#fff;font-size:13px;font-weight:800}
+.checklist li.done .check-text{opacity:0.4;text-decoration:line-through;text-decoration-color:var(--text3)}
+.check-text{font-size:14px;flex:1}
+.check-text strong{font-weight:600;color:var(--text)}
+.check-text span{display:block;font-size:12.5px;color:var(--text2);margin-top:2px}
+
+/* ===== FOOD GRID ===== */
+.food-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.food-col{padding:16px;border-radius:var(--radius-sm);font-size:13px}
+.food-col.bad{background:var(--coral-bg);border:1px solid var(--coral-border)}
+.food-col.good{background:var(--green-bg);border:1px solid var(--green-border)}
+.food-col h4{font-family:var(--font-head);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px}
+.food-col.bad h4{color:var(--coral)}
+.food-col.good h4{color:var(--green)}
+.food-col ul{list-style:none}
+.food-col li{padding:3px 0;font-size:12.5px;color:var(--text2);border:none;cursor:default}
+
+/* ===== ROUTINE BLOCKS ===== */
+.routine{
+  border-left:3px solid var(--green);
+  padding:16px 18px;margin:12px 0;
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  background:var(--green-bg);
+}
+.routine.noon{border-left-color:var(--amber);background:var(--amber-bg)}
+.routine.night{border-left-color:var(--purple);background:var(--purple-bg)}
+.routine h4{font-family:var(--font-head);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;color:var(--green)}
+.routine.noon h4{color:var(--amber)}
+.routine.night h4{color:var(--purple)}
+
+/* ===== NO-GO LIST ===== */
+.nogo{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--bg);align-items:flex-start}
+.nogo:last-child{border-bottom:none}
+.nogo-icon{
+  width:38px;height:38px;border-radius:10px;flex-shrink:0;
+  background:var(--coral-bg);border:1px solid var(--coral-border);
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.nogo h4{font-family:var(--font-head);font-size:14px;font-weight:600}
+.nogo p{font-size:12.5px;color:var(--text2);margin-top:2px}
+
+/* ===== TIMELINE ===== */
+.tl{position:relative;padding-left:28px;margin:8px 0}
+.tl::before{
+  content:'';position:absolute;left:7px;top:10px;bottom:10px;width:2px;
+  background:linear-gradient(to bottom,var(--green),var(--primary),var(--purple));border-radius:2px;
+}
+.tl-item{position:relative;padding-bottom:24px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:'';position:absolute;left:-24px;top:6px;
+  width:11px;height:11px;border-radius:50%;
+  background:var(--green);border:2px solid var(--bg);
+  box-shadow:0 0 0 4px var(--green-bg);
+}
+.tl-item h4{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--primary);margin-bottom:3px}
+.tl-item p{font-size:13px;color:var(--text2)}
+
+/* ===== SUPPLEMENT ROWS ===== */
+.supp{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+  padding:14px 0;border-bottom:1px solid var(--bg);gap:4px;
+}
+.supp:last-child{border-bottom:none}
+.supp-name{font-family:var(--font-head);font-size:14px;font-weight:600;flex:1;min-width:140px}
+.supp-dose{font-size:12px;color:var(--text2);text-align:right}
+.supp-why{font-size:12px;color:var(--text3);width:100%;margin-top:3px}
+
+/* ===== LAB TABLE ===== */
+.lab-table{width:100%;font-size:13px;border-collapse:collapse}
+.lab-table th{
+  text-align:left;padding:8px;font-family:var(--font-head);font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.5px;color:var(--text3);
+  border-bottom:2px solid var(--bg);
+}
+.lab-table td{padding:9px 8px;border-bottom:1px solid var(--bg);vertical-align:middle}
+.lab-table tr:last-child td{border-bottom:none}
+.lab-table .flagged{background:var(--amber-bg)}
+.lab-table .critical{background:var(--coral-bg)}
+
+/* ===== PROGRESS RING ===== */
+.progress-wrap{display:flex;align-items:center;gap:18px;margin:16px 0}
+.progress-ring{position:relative;width:68px;height:68px;flex-shrink:0}
+.progress-ring svg{transform:rotate(-90deg);width:68px;height:68px}
+.progress-ring circle{fill:none;stroke-width:5;stroke-linecap:round}
+.progress-ring .bg{stroke:var(--bg)}
+.progress-ring .fg{stroke:var(--green);transition:stroke-dashoffset 0.6s ease}
+.progress-pct{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--font-head);font-size:17px;font-weight:700;color:var(--green);
+}
+.progress-label{font-size:14px;color:var(--text2)}
+.progress-label strong{font-family:var(--font-head);color:var(--text);display:block;font-size:15px;margin-bottom:2px}
+
+/* ===== MEAL TIMELINE ===== */
+.meal-row{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--bg);align-items:flex-start}
+.meal-row:last-child{border-bottom:none}
+.meal-time{
+  font-family:var(--font-head);font-size:11px;font-weight:700;color:var(--primary);
+  text-transform:uppercase;letter-spacing:0.4px;min-width:76px;flex-shrink:0;padding-top:1px;
+}
+.meal-desc{font-size:13.5px;color:var(--text2)}
+
+/* ===== MORE MENU ===== */
+#moreMenu{
+  display:none;position:fixed;bottom:var(--nav-h);left:0;right:0;z-index:999;
+  background:rgba(255,255,255,0.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-top:1px solid rgba(139,111,92,0.08);
+  padding:16px 20px 8px;
+  animation:slideUp 0.25s ease;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.more-btn{
+  background:var(--card);border:1px solid var(--bg);border-radius:14px;
+  padding:16px 8px;color:var(--text);font-family:var(--font-head);font-size:12px;font-weight:600;
+  display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;
+  touch-action:manipulation;box-shadow:var(--shadow);transition:all 0.2s;
+}
+.more-btn:active{transform:scale(0.96)}
+
+/* ===== MISC ===== */
+.divider{height:1px;background:var(--bg);margin:16px 0}
+.section-label{
+  font-family:var(--font-head);font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:1px;color:var(--text3);margin:24px 0 10px;
+}
+.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}
+.mb-8{margin-bottom:8px}
+.text-sm{font-size:13px}.text-xs{font-size:12px}
+.text-muted{color:var(--text2)}
+.text-center{text-align:center}
+.fw-600{font-weight:600}
+
+@media(max-width:380px){
+  .food-split{grid-template-columns:1fr}
+  .page{padding:0 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- ======================== PAGE: HOME ======================== -->
+<div class="page active" id="p-home">
+  <div class="page-header">
+    <h1>Skin Clear</h1>
+    <p>Dein Weg zu gesunder Haut &mdash; ohne Cortison</p>
+  </div>
+
+  <div class="alert blue">
+    <span class="alert-icon">&#9432;</span>
+    <div><strong>Blutwerte sind 6 Monate alt.</strong> Die Dyshidrose ist leichter, aber nicht weg. Dein K&ouml;rper reagiert &mdash; jetzt m&uuml;ssen die Ursachen gel&ouml;st werden. Bitte zeitnah neue Werte machen lassen.</div>
+  </div>
+
+  <div class="card">
+    <div class="progress-wrap">
+      <div class="progress-ring">
+        <svg><circle class="bg" cx="34" cy="34" r="28"/><circle class="fg" id="progressCircle" cx="34" cy="34" r="28" stroke-dasharray="175.93" stroke-dashoffset="175.93"/></svg>
+        <span class="progress-pct" id="progressPct">0%</span>
+      </div>
+      <div class="progress-label">
+        <strong>Tages-Checkliste</strong>
+        <span id="progressSub">Tippe auf &bdquo;Routine&ldquo; um zu starten</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Deine Haupttreiber</div>
+
+  <div class="card card-sm" onclick="goTo('p-darm')" style="cursor:pointer">
+    <div class="card-header" style="margin-bottom:0">
+      <div class="card-icon amber">&#129440;</div>
+      <div style="flex:1">
+        <div class="card-title">Darm-Dysbiose</div>
+        <div class="card-sub">E.&thinsp;coli fehlt, Candida erh&ouml;ht, pH zu hoch</div>
+      </div>
+      <span class="pill pill-bad">Nr. 1</span>
+    </div>
+  </div>
+
+  <div class="card card-sm" onclick="goTo('p-essen')" style="cursor:pointer">
+    <div class="card-header" style="margin-bottom:0">
+      <div class="card-icon blue">&#129534;</div>
+      <div style="flex:1">
+        <div class="card-title">Nickel-Empfindlichkeit</div>
+        <div class="card-sub">LTT grenzwertig &mdash; nickelarm essen hilft</div>
+      </div>
+      <span class="pill pill-warn">Trigger</span>
+    </div>
+  </div>
+
+  <div class="card card-sm" onclick="goTo('p-supps')" style="cursor:pointer">
+    <div class="card-header" style="margin-bottom:0">
+      <div class="card-icon coral">&#9728;&#65039;</div>
+      <div style="flex:1">
+        <div class="card-title">Vitamin D zu hoch</div>
+        <div class="card-sub">110 ng/ml &mdash; sofort pausieren</div>
+      </div>
+      <span class="pill pill-bad">Stopp</span>
+    </div>
+  </div>
+
+  <div class="card card-sm" onclick="goTo('p-stress')" style="cursor:pointer">
+    <div class="card-header" style="margin-bottom:0">
+      <div class="card-icon purple">&#128171;</div>
+      <div style="flex:1">
+        <div class="card-title">Chronische Entz&uuml;ndung</div>
+        <div class="card-sub">Monozyten hoch, Glucose niedrig</div>
+      </div>
+      <span class="pill pill-info">Hintergrund</span>
+    </div>
+  </div>
+
+  <div class="alert green mt-12">
+    <span class="alert-icon">&#10003;</span>
+    <div><strong>Das Gute:</strong> Schilddr&uuml;se, Leber, Niere, Eisen, Zink, Magnesium sind alle in Ordnung. Deine Basis ist gesund!</div>
+  </div>
+</div>
+
+<!-- ======================== PAGE: ESSEN ======================== -->
+<div class="page" id="p-essen">
+  <div class="page-header">
+    <h1>Ern&auml;hrung</h1>
+    <p>Nickelarm, histaminarm, zuckerarm</p>
+  </div>
+
+  <div class="card card-sm">
+    <p class="text-sm text-muted">Drei Regeln f&uuml;r deine Ern&auml;hrung. Klingt nach viel &mdash; ist aber machbar und du wirst dich insgesamt besser f&uuml;hlen. 6-8 Wochen konsequent, dann langsam testen.</p>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#129382; Nickelarm essen <span class="pill pill-warn" style="margin-left:8px">Wichtig</span></h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <p class="text-sm text-muted mb-8">80% der Nickel-Sensibilisierten hatten deutliche Besserung nach 4-8 Wochen nickelarmer Ern&auml;hrung.</p>
+      <div class="food-split">
+        <div class="food-col bad">
+          <h4>&#10060; Meiden</h4>
+          <ul>
+            <li>Schokolade &amp; Kakao</li>
+            <li>N&uuml;sse &amp; Samen</li>
+            <li>H&uuml;lsenfr&uuml;chte</li>
+            <li>Soja &amp; Tofu</li>
+            <li>Hafer &amp; Vollkorn</li>
+            <li>Spinat &amp; Tomaten</li>
+            <li>Konservendosen</li>
+            <li>Schwarzer Tee</li>
+          </ul>
+        </div>
+        <div class="food-col good">
+          <h4>&#9989; Gut f&uuml;r dich</h4>
+          <ul>
+            <li>Reis &amp; Kartoffeln</li>
+            <li>Huhn, Rind, Lamm</li>
+            <li>Eier</li>
+            <li>Frischer Fisch</li>
+            <li>Milchprodukte</li>
+            <li>Gurke, Zucchini</li>
+            <li>Brokkoli, Karotten</li>
+            <li>&Auml;pfel, Birnen</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert blue mt-8"><span class="alert-icon">&#128161;</span><div>Nicht aus Metalldosen essen. Glas- oder Emaillet&ouml;pfe statt Edelstahl verwenden.</div></div>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#127846; Histaminarm essen</h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <p class="text-sm text-muted mb-8">Histamin verst&auml;rkt Juckreiz und Bl&auml;schen. Dein Candida produziert vermutlich extra Histamin.</p>
+      <div class="food-split">
+        <div class="food-col bad">
+          <h4>&#10060; Meiden</h4>
+          <ul>
+            <li>Gereifter K&auml;se</li>
+            <li>Rotwein &amp; Sekt</li>
+            <li>Ger&auml;uchertes</li>
+            <li>Sauerkraut, Kimchi</li>
+            <li>Essig</li>
+            <li>Thunfisch, Makrele</li>
+            <li>Erdbeeren, Zitrus</li>
+            <li>Aufgew&auml;rmte Reste</li>
+          </ul>
+        </div>
+        <div class="food-col good">
+          <h4>&#9989; Gut f&uuml;r dich</h4>
+          <ul>
+            <li>Frisch gekochtes</li>
+            <li>Frischer Fisch (sofort)</li>
+            <li>Frischk&auml;se, Quark</li>
+            <li>Reis, Kartoffeln</li>
+            <li>Meistes Gem&uuml;se</li>
+            <li>&Auml;pfel, Melone</li>
+            <li>Kr&auml;utertee</li>
+            <li>Frisch = Trumpf!</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert amber mt-8"><span class="alert-icon">&#9888;</span><div>Reste am selben Tag <strong>einfrieren</strong>, nicht im K&uuml;hlschrank lagern &mdash; Histamin steigt mit der Zeit.</div></div>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#127852; Perubalsam meiden</h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <p class="text-sm text-muted mb-8">Dein Allergietest war positiv auf Perubalsam. Auch in Lebensmitteln enthalten:</p>
+      <ul style="padding-left:18px;font-size:13.5px;color:var(--text2)">
+        <li>Zimt, Vanille, Gew&uuml;rznelken reduzieren</li>
+        <li>Curry-Mischungen reduzieren</li>
+        <li>Cola und aromatisierte Drinks meiden</li>
+        <li>Zitrusfr&uuml;chte reduzieren</li>
+        <li>Ketchup und Tomatenmark reduzieren</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#128170; Blutzucker stabil halten</h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <p class="text-sm text-muted mb-8">Dein Blutzucker war leicht zu niedrig. Unterzuckerung stresst den K&ouml;rper und triggert Sch&uuml;be.</p>
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Nie l&auml;nger als 3-4h ohne Essen</strong></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Jede Mahlzeit: Protein + Fett + langsame KH</strong></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Morgens proteinreich</strong><span>z.B. Eier + Avocado + Reis</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Zucker &amp; Wei&szlig;mehl weglassen</strong><span>F&uuml;ttert auch den Candida!</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-label">Beispieltag</div>
+  <div class="card">
+    <div class="meal-row"><span class="meal-time">Fr&uuml;hst&uuml;ck</span><span class="meal-desc">R&uuml;hrei mit Zucchini + Reiswaffel + Avocado</span></div>
+    <div class="meal-row"><span class="meal-time">Snack</span><span class="meal-desc">Apfel + ein paar Scheiben Putenbrust</span></div>
+    <div class="meal-row"><span class="meal-time">Mittag</span><span class="meal-desc">Reis mit H&uuml;hnchen + Brokkoli + Oliven&ouml;l</span></div>
+    <div class="meal-row"><span class="meal-time">Snack</span><span class="meal-desc">Reiswaffel mit Frischk&auml;se + Gurke</span></div>
+    <div class="meal-row"><span class="meal-time">Abend</span><span class="meal-desc">Kartoffeln + frischer Lachs + Karotten</span></div>
+  </div>
+</div>
+
+<!-- ======================== PAGE: DARM ======================== -->
+<div class="page" id="p-darm">
+  <div class="page-header">
+    <h1>Darmaufbau</h1>
+    <p>Der Schl&uuml;ssel zu deiner Haut</p>
+  </div>
+
+  <div class="card card-sm">
+    <p class="text-sm text-muted">70% deines Immunsystems sitzt im Darm. Wenn die Darmwand durchl&auml;ssig ist, reagiert dein Immunsystem &uuml;ber &mdash; und das zeigt sich als Bl&auml;schen. <strong>8-12 Wochen konsequent = sp&uuml;rbare Ergebnisse.</strong></p>
+  </div>
+
+  <div class="alert coral">
+    <span class="alert-icon">&#129440;</span>
+    <div><strong>Dein Befund:</strong> Gute E.&thinsp;coli fast weg, schlechte Variante 10x zu hoch, Candida-Pilz 10x erh&ouml;ht, pH zu basisch, &Ouml;kobilanz stark gest&ouml;rt.</div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3><span class="pill pill-warn" style="margin-right:4px">W 1-4</span> Candida bek&auml;mpfen</h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <p class="text-sm text-muted mb-8">Der Hefepilz muss zuerst reduziert werden, bevor gute Bakterien Platz haben.</p>
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Zucker komplett streichen</strong><span>Candida lebt von Zucker</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Wei&szlig;mehl &amp; Alkohol weglassen</strong></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Capryls&auml;ure</strong><span>3x 400mg tgl. zu Mahlzeiten &mdash; Anti-Pilz aus Kokos&ouml;l</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Oregan&ouml;l-Kapseln</strong><span>2x 150mg tgl. f&uuml;r 3 Wochen</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Saccharomyces boulardii</strong><span>500mg tgl. &mdash; freundliche Hefe, verdr&auml;ngt Candida</span></div></li>
+      </ul>
+      <div class="alert amber mt-12"><span class="alert-icon">&#128161;</span><div>In den ersten Tagen evtl. M&uuml;digkeit oder Kopfschmerzen (&bdquo;Die-off&ldquo;). <strong>Normal!</strong> Zeigt dass Candida abstirbt. Viel Wasser trinken.</div></div>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3><span class="pill pill-ok" style="margin-right:4px">W 3-12</span> Flora aufbauen</h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Mutaflor&reg;</strong><span>1 Kps/Tag, nach 1 Woche auf 2. Baut genau die fehlende E.&thinsp;coli auf</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Multi-Probiotikum</strong><span>L. rhamnosus + Bifidobacterium longum, 10-20 Mrd. KBE</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Butyrat (Tributyrin)</strong><span>600-900mg tgl. &mdash; senkt deinen pH und n&auml;hrt die Darmwand</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Resistente St&auml;rke essen</strong><span>Kalte Kartoffeln, kalter Reis vom Vortag = Futter f&uuml;r gute Bakterien</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3><span class="pill pill-ok" style="margin-right:4px">W 4-12</span> Darmwand reparieren</h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>L-Glutamin</strong><span>5g morgens n&uuml;chtern in Wasser &mdash; repariert die Zellverbindungen</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Zink-Carnosin</strong><span>75mg tgl. &mdash; sch&uuml;tzt die Schleimhaut</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Omega-3 (EPA/DHA)</strong><span>2g tgl. &mdash; entz&uuml;ndungshemmend im ganzen K&ouml;rper</span></div></li>
+      </ul>
+      <div class="alert green mt-8"><span class="alert-icon">&#10003;</span><div>Deine Bifidobakterien und Laktobazillen sind okay &mdash; du hast eine gute Basis zum Aufbauen!</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PAGE: HAUT ======================== -->
+<div class="page" id="p-haut">
+  <div class="page-header">
+    <h1>Hautpflege</h1>
+    <p>Cortisonfrei &mdash; sanft aber wirksam</p>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#128167; Akut &mdash; bei Bl&auml;schen</h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Essigsaure Tonerde</strong><span>1:10 verd&uuml;nnen, Tuch eintauchen, 15 Min. auflegen. Trocknet &amp; desinfiziert</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Schwarztee-Kompressen</strong><span>2 Beutel stark ziehen, abk&uuml;hlen, 15 Min. auflegen</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Zinkoxid-Sch&uuml;ttelmixtur</strong><span>Lotio alba aus der Apotheke &mdash; trocknet und sch&uuml;tzt</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Nicht aufkratzen!</strong><span>Infektionsrisiko &mdash; lieber k&uuml;hlen</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#129524; T&auml;glich &mdash; Basispflege</h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Ceramid-Creme</strong><span>CeraVe oder Physiogel AI &mdash; OHNE Duftstoffe!</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Nachtkerzen&ouml;l pur</strong><span>Abends auf die H&auml;nde &mdash; Gamma-Linolens&auml;ure st&auml;rkt die Barriere</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Nach JEDEM Waschen eincremen</strong><span>Immer. Ohne Ausnahme.</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Seife wechseln</strong><span>Syndet z.B. Sebamed &mdash; kein SLS, kein Duft</span></div></li>
+      </ul>
+      <div class="alert blue mt-8"><span class="alert-icon">&#128269;</span><div><strong>Produkt-Check:</strong> Dreh jede Creme um. Suche nach: <em>Myroxylon pereirae</em> (Perubalsam), <em>Sorbitan Sesquioleate</em>, <em>Parfum</em>. Wenn drin &rarr; weg.</div></div>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#128138; Alternative zu Cortison</h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <p class="text-sm text-muted mb-8">Bei starken Sch&uuml;ben frag deine &Auml;rztin nach diesen cortisonfreien Alternativen:</p>
+      <div class="card card-sm" style="background:var(--bg);box-shadow:none">
+        <strong style="font-size:14px">Tacrolimus 0.1% Salbe (Protopic)</strong>
+        <p class="text-xs text-muted mt-8">Wirkt &auml;hnlich wie Cortison, macht die Haut aber nicht d&uuml;nn. F&uuml;r Langzeiteinsatz geeignet.</p>
+      </div>
+      <div class="card card-sm mt-8" style="background:var(--bg);box-shadow:none">
+        <strong style="font-size:14px">Pimecrolimus (Elidel)</strong>
+        <p class="text-xs text-muted mt-8">Leichtere Variante. Beide sind verschreibungspflichtig aber cortisonfrei.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#129507; Handschutz-Regeln</h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Putzen/Abwaschen:</strong><span>Baumwollhandschuh drunter + Nitril dr&uuml;ber. KEIN Latex!</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Nachts:</strong><span>Eincremen, d&uuml;nne Baumwollhandschuhe dr&uuml;ber</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Kein Handdesinfektionsmittel</strong><span>Trocknet die Haut brutal aus</span></div></li>
+        <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Nickel meiden</strong><span>Kein Nickelschmuck, G&uuml;rtelschnallen direkt auf Haut</span></div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PAGE: ROUTINE ======================== -->
+<div class="page" id="p-routine">
+  <div class="page-header">
+    <h1>Tagesroutine</h1>
+    <p>Hake ab was du heute geschafft hast</p>
+  </div>
+
+  <div class="card" id="dailyCard">
+    <div class="routine">
+      <h4>&#9728;&#65039; Morgens</h4>
+      <ul class="checklist" id="morningList">
+        <li onclick="toggleDaily(this)" data-key="d-m1"><div class="check-box"></div><div class="check-text">Glas Wasser + Prise Salz</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-m2"><div class="check-box"></div><div class="check-text">L-Glutamin 5g in Wasser (n&uuml;chtern)</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-m3"><div class="check-box"></div><div class="check-text">Kaltes Wasser ins Gesicht</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-m4"><div class="check-box"></div><div class="check-text">Proteinreiches Fr&uuml;hst&uuml;ck</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-m5"><div class="check-box"></div><div class="check-text">Mutaflor + Probiotikum</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-m6"><div class="check-box"></div><div class="check-text">Omega-3 + Vitamin K2</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-m7"><div class="check-box"></div><div class="check-text">H&auml;nde eincremen</div></li>
+      </ul>
+    </div>
+
+    <div class="routine noon">
+      <h4>&#9728; Tags&uuml;ber</h4>
+      <ul class="checklist" id="dayList">
+        <li onclick="toggleDaily(this)" data-key="d-d1"><div class="check-box"></div><div class="check-text">Alle 3-4h gegessen</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-d2"><div class="check-box"></div><div class="check-text">Nach Waschen eingecremt</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-d3"><div class="check-box"></div><div class="check-text">Handschuhe bei Wasser/Chemie</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-d4"><div class="check-box"></div><div class="check-text">2-3x Atem&uuml;bung (4-7-8)</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-d5"><div class="check-box"></div><div class="check-text">20 Min. Bewegung</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-d6"><div class="check-box"></div><div class="check-text">Genug Wasser getrunken</div></li>
+      </ul>
+    </div>
+
+    <div class="routine night">
+      <h4>&#127769; Abends</h4>
+      <ul class="checklist" id="nightList">
+        <li onclick="toggleDaily(this)" data-key="d-n1"><div class="check-box"></div><div class="check-text">Leichtes Abendessen</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-n2"><div class="check-box"></div><div class="check-text">Butyrat + S. boulardii</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-n3"><div class="check-box"></div><div class="check-text">Ashwagandha + Magnesium</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-n4"><div class="check-box"></div><div class="check-text">Nachtkerzen&ouml;l auf H&auml;nde</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-n5"><div class="check-box"></div><div class="check-text">Baumwollhandschuhe an</div></li>
+        <li onclick="toggleDaily(this)" data-key="d-n6"><div class="check-box"></div><div class="check-text">Handy weg &mdash; schlafen</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="text-center mt-16">
+    <button onclick="resetDaily()" style="
+      background:none;border:1px solid var(--bg3);
+      color:var(--text3);padding:10px 24px;border-radius:100px;
+      font-family:var(--font-head);font-size:13px;font-weight:600;cursor:pointer;
+      touch-action:manipulation;transition:all 0.2s;
+    ">Neuer Tag &mdash; alles zur&uuml;cksetzen</button>
+  </div>
+</div>
+
+<!-- ======================== PAGE: STRESS ======================== -->
+<div class="page" id="p-stress">
+  <div class="page-header">
+    <h1>Stress &amp; Nerven</h1>
+    <p>Nervensystem runterfahren = weniger Sch&uuml;be</p>
+  </div>
+
+  <div class="card card-sm">
+    <p class="text-sm text-muted">Stress ist einer der gr&ouml;&szlig;ten Trigger. Dein Blutzucker und Natrium waren leicht niedrig &mdash; Zeichen dass dein K&ouml;rper im Dauerstress war.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon green">&#127744;</div>
+      <div><div class="card-title">Vagusnerv aktivieren</div><div class="card-sub">Dein Entspannungsnerv &mdash; 2 Min. am Tag reichen</div></div>
+    </div>
+    <ul class="checklist">
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>4-7-8 Atmung</strong><span>4 Sek. ein, 7 Sek. halten, 8 Sek. aus. 3-4x wiederholen</span></div></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Kaltes Wasser ins Gesicht</strong><span>30 Sek. morgens &mdash; aktiviert sofort den Vagusnerv</span></div></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Summen oder Gurgeln</strong><span>Klingt komisch, stimuliert aber den Vagusnerv im Hals</span></div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon purple">&#127807;</div>
+      <div><div class="card-title">Unterst&uuml;tzung</div></div>
+    </div>
+    <ul class="checklist">
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Ashwagandha (KSM-66)</strong><span>300-600mg tgl. &mdash; senkt nachweislich Cortisol</span></div></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Magnesiumglycinat 400mg</strong><span>Abends &mdash; entspannt Muskeln &amp; Nerven, besserer Schlaf</span></div></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>20-30 Min. Bewegung t&auml;glich</strong><span>Spazieren, Yoga, Schwimmen. Kein hartes Training bei Schub</span></div></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>7-8 Std. Schlaf</strong><span>Gleiche Zeiten. Handy 1h vorher weg</span></div></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ======================== PAGE: SUPPS ======================== -->
+<div class="page" id="p-supps">
+  <div class="page-header">
+    <h1>Supplemente</h1>
+    <p>Nicht alles auf einmal &mdash; phasenweise starten</p>
+  </div>
+
+  <div class="alert coral">
+    <span class="alert-icon">&#9888;</span>
+    <div><strong>Vitamin D: SOFORT PAUSIEREN!</strong> Dein Spiegel war 110 ng/ml (Ziel: 50-60). Erst neuen Blutwert abwarten. Danach max. 1000-2000 IE/Tag.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon amber">1</div>
+      <div><div class="card-title">Phase 1 &mdash; Woche 1-4</div><div class="card-sub">Anti-Candida</div></div>
+    </div>
+    <div class="supp"><span class="supp-name">Capryls&auml;ure</span><span class="supp-dose">3x 400mg</span><span class="supp-why">Nat&uuml;rliches Anti-Pilz-Mittel</span></div>
+    <div class="supp"><span class="supp-name">Oregan&ouml;l</span><span class="supp-dose">2x 150mg, 3 Wo.</span><span class="supp-why">Starkes Antimykotikum</span></div>
+    <div class="supp"><span class="supp-name">S. boulardii</span><span class="supp-dose">500mg/Tag</span><span class="supp-why">Verdr&auml;ngt Candida</span></div>
+    <div class="supp"><span class="supp-name">Vitamin C</span><span class="supp-dose">1000mg/Tag</span><span class="supp-why">Histaminabbau</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon green">2</div>
+      <div><div class="card-title">Phase 2 &mdash; ab Woche 3</div><div class="card-sub">Aufbau &amp; Reparatur</div></div>
+    </div>
+    <div class="supp"><span class="supp-name">Mutaflor&reg;</span><span class="supp-dose">1-2 Kps/Tag</span><span class="supp-why">Baut fehlende E.&thinsp;coli auf</span></div>
+    <div class="supp"><span class="supp-name">Multi-Probiotikum</span><span class="supp-dose">10-20 Mrd. KBE</span><span class="supp-why">Vielfalt erh&ouml;hen</span></div>
+    <div class="supp"><span class="supp-name">Butyrat</span><span class="supp-dose">600-900mg/Tag</span><span class="supp-why">Senkt pH, n&auml;hrt Darmwand</span></div>
+    <div class="supp"><span class="supp-name">L-Glutamin</span><span class="supp-dose">5g morgens</span><span class="supp-why">Repariert Darmbarriere</span></div>
+    <div class="supp"><span class="supp-name">Omega-3</span><span class="supp-dose">2g/Tag</span><span class="supp-why">Entz&uuml;ndungshemmend</span></div>
+    <div class="supp"><span class="supp-name">Quercetin</span><span class="supp-dose">2x 500mg</span><span class="supp-why">Mastzellen-Stabilisator</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon purple">&#8734;</div>
+      <div><div class="card-title">Durchgehend</div><div class="card-sub">Stress &amp; Grundversorgung</div></div>
+    </div>
+    <div class="supp"><span class="supp-name">Ashwagandha KSM-66</span><span class="supp-dose">300-600mg</span><span class="supp-why">Senkt Cortisol</span></div>
+    <div class="supp"><span class="supp-name">Magnesiumglycinat</span><span class="supp-dose">400mg abends</span><span class="supp-why">Nerven &amp; Schlaf</span></div>
+    <div class="supp"><span class="supp-name">Vitamin K2 (MK7)</span><span class="supp-dose">200&micro;g/Tag</span><span class="supp-why">Calcium-Steuerung</span></div>
+  </div>
+</div>
+
+<!-- ======================== PAGE: NOGO ======================== -->
+<div class="page" id="p-nogo">
+  <div class="page-header">
+    <h1>No-Go's</h1>
+    <p>Das macht deine Haut schlechter</p>
+  </div>
+
+  <div class="card">
+    <div class="nogo"><div class="nogo-icon">&#127851;</div><div><h4>Zucker, Wei&szlig;mehl, Alkohol</h4><p>F&uuml;ttert Candida und f&ouml;rdert Entz&uuml;ndungen</p></div></div>
+    <div class="nogo"><div class="nogo-icon">&#9728;&#65039;</div><div><h4>Vitamin D hochdosiert weiternehmen</h4><p>Dein Spiegel ist/war viel zu hoch &mdash; Immunsystem wird verwirrt</p></div></div>
+    <div class="nogo"><div class="nogo-icon">&#127819;</div><div><h4>Nickelreiche Lebensmittel</h4><p>Schoko, N&uuml;sse, H&uuml;lsenfr&uuml;chte, Vollkorn, Konserven</p></div></div>
+    <div class="nogo"><div class="nogo-icon">&#127861;</div><div><h4>Fermentiertes (vorerst)</h4><p>Sauerkraut, Kimchi, alter K&auml;se &mdash; histaminreich</p></div></div>
+    <div class="nogo"><div class="nogo-icon">&#128132;</div><div><h4>Duftende Kosmetik</h4><p>Alles mit &bdquo;Parfum&ldquo; oder &bdquo;Fragrance&ldquo; raus</p></div></div>
+    <div class="nogo"><div class="nogo-icon">&#129507;</div><div><h4>Latex-Handschuhe</h4><p>Immer Nitril oder Vinyl nehmen</p></div></div>
+    <div class="nogo"><div class="nogo-icon">&#128166;</div><div><h4>Waschen ohne Eincremen</h4><p>Jedes Waschen ohne Creme zerst&ouml;rt die Barriere</p></div></div>
+    <div class="nogo"><div class="nogo-icon">&#128138;</div><div><h4>Cortison dauerhaft</h4><p>Haut wird d&uuml;nn, Rebound, verschlimmert Dysbiose</p></div></div>
+    <div class="nogo"><div class="nogo-icon">&#128164;</div><div><h4>Schlafmangel &amp; Dauerstress</h4><p>Cortisol steigt &rarr; Immunsystem spielt verr&uuml;ckt</p></div></div>
+    <div class="nogo"><div class="nogo-icon">&#128138;</div><div><h4>Antibiotika wenn vermeidbar</h4><p>Zerst&ouml;rt die Darmflora weiter</p></div></div>
+  </div>
+</div>
+
+<!-- ======================== PAGE: ZEITPLAN ======================== -->
+<div class="page" id="p-zeit">
+  <div class="page-header">
+    <h1>Zeitplan</h1>
+    <p>Was du wann erwarten kannst</p>
+  </div>
+
+  <div class="card">
+    <div class="tl">
+      <div class="tl-item">
+        <h4>Woche 1-2 &middot; Umstellung</h4>
+        <p>Ern&auml;hrung umstellen, erste Supplemente. Evtl. leichte Erstverschlimmerung. Noch keine sichtbare Besserung &mdash; <strong>das ist normal!</strong></p>
+      </div>
+      <div class="tl-item">
+        <h4>Woche 3-4 &middot; Erste Zeichen</h4>
+        <p>Verdauung wird besser. Weniger Bl&auml;hungen. Sch&uuml;be werden etwas milder.</p>
+      </div>
+      <div class="tl-item">
+        <h4>Woche 5-8 &middot; Sichtbare Besserung</h4>
+        <p>Deutlich weniger Bl&auml;schen. Haut wird ruhiger. Juckreiz l&auml;sst nach. Jetzt Vitamin D messen lassen.</p>
+      </div>
+      <div class="tl-item">
+        <h4>Woche 8-12 &middot; Stabilisierung</h4>
+        <p>Darmflora erholt sich. Sch&uuml;be selten und mild. Kontroll-Stuhltest machen.</p>
+      </div>
+      <div class="tl-item">
+        <h4>Monat 4-6 &middot; Konsolidierung</h4>
+        <p>Weitgehend schubfrei. Supplemente langsam reduzieren. Lebensmittel vorsichtig testen.</p>
+      </div>
+      <div class="tl-item">
+        <h4>Monat 6-12 &middot; Langfristig</h4>
+        <p>Dauerhaft stabil mit Basisroutine. Gelegentliche Mini-Sch&uuml;be bei Stress m&ouml;glich. <strong>Remission ist realistisch!</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert green">
+    <span class="alert-icon">&#128170;</span>
+    <div><strong>Deine Ausgangslage ist gut:</strong> Dyshidrose schon leichter, Organe gesund, Grundn&auml;hrstoffe okay. Darm + Trigger sind der Schl&uuml;ssel &mdash; und die kannst du &auml;ndern!</div>
+  </div>
+
+  <div class="section-label">Kontrolltermine</div>
+  <div class="card text-center" style="padding:24px">
+    <p class="text-sm text-muted">
+      &#128197; <strong style="color:var(--amber)">Jetzt:</strong> Blutbild + Vitamin D + Stuhlflora<br><br>
+      &#128197; <strong style="color:var(--blue)">Nach 8 Wochen:</strong> Vitamin D Kontrolle<br><br>
+      &#128197; <strong style="color:var(--green)">Nach 12 Wochen:</strong> Stuhlflora + Blutbild
+    </p>
+  </div>
+</div>
+
+<!-- ======================== PAGE: LABOR ======================== -->
+<div class="page" id="p-labor">
+  <div class="page-header">
+    <h1>Laborwerte</h1>
+    <p>Stand Oktober 2025 &mdash; neue Werte empfohlen</p>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#129656; Blutbild <span class="pill pill-warn" style="margin-left:6px">2 auff&auml;llig</span></h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <table class="lab-table">
+        <thead><tr><th>Wert</th><th>Erg.</th><th>Ref.</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Leukozyten</td><td>7.5</td><td>3.9-10.2</td><td><span class="pill pill-ok">OK</span></td></tr>
+          <tr><td>Erythrozyten</td><td>4.2</td><td>3.9-5.2</td><td><span class="pill pill-ok">OK</span></td></tr>
+          <tr><td>H&auml;moglobin</td><td>7.9</td><td>7.4-9.6</td><td><span class="pill pill-ok">OK</span></td></tr>
+          <tr class="critical"><td><strong>Monozyten</strong></td><td><strong>12.6%</strong></td><td>2-9.5%</td><td><span class="pill pill-bad">Hoch</span></td></tr>
+          <tr class="flagged"><td><strong>Eosinophile</strong></td><td><strong>4.4%</strong></td><td>0.5-5.5%</td><td><span class="pill pill-warn">Grenz</span></td></tr>
+          <tr><td>Thrombozyten</td><td>269</td><td>150-370</td><td><span class="pill pill-ok">OK</span></td></tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-muted mt-12"><strong>Monozyten hoch</strong> = Immunsystem k&auml;mpft gegen chronische Entz&uuml;ndung. <strong>Eosinophile grenzwertig</strong> = allergische Tendenz.</p>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#128167; Stoffwechsel <span class="pill pill-warn" style="margin-left:6px">2 auff&auml;llig</span></h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <table class="lab-table">
+        <thead><tr><th>Wert</th><th>Erg.</th><th>Ref.</th><th></th></tr></thead>
+        <tbody>
+          <tr class="flagged"><td><strong>Glucose</strong></td><td><strong>4.0</strong></td><td>4.11-6.00</td><td><span class="pill pill-warn">Niedrig</span></td></tr>
+          <tr class="flagged"><td><strong>Natrium</strong></td><td><strong>135</strong></td><td>136-145</td><td><span class="pill pill-warn">Niedrig</span></td></tr>
+          <tr><td>Cholesterin</td><td>3.25</td><td>&lt;5.2</td><td><span class="pill pill-ok">OK</span></td></tr>
+          <tr><td>Leber GOT/GPT</td><td>ok</td><td>&mdash;</td><td><span class="pill pill-ok">OK</span></td></tr>
+          <tr><td>Niere GFR</td><td>116</td><td>&gt;60</td><td><span class="pill pill-ok">OK</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#9728;&#65039; Vitamine &amp; Minerale <span class="pill pill-bad" style="margin-left:6px">1 kritisch</span></h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <table class="lab-table">
+        <thead><tr><th>Wert</th><th>Erg.</th><th>Ref.</th><th></th></tr></thead>
+        <tbody>
+          <tr class="critical"><td><strong>Vitamin D3</strong></td><td><strong>110.9</strong></td><td>30-70</td><td><span class="pill pill-bad">Zu hoch!</span></td></tr>
+          <tr><td>Eisen</td><td>25.5</td><td>6.6-29.5</td><td><span class="pill pill-ok">OK</span></td></tr>
+          <tr><td>Ferritin</td><td>77.7</td><td>9-140</td><td><span class="pill pill-ok">OK</span></td></tr>
+          <tr><td>Zink</td><td>85</td><td>61-115</td><td><span class="pill pill-ok">OK</span></td></tr>
+          <tr><td>Magnesium</td><td>1.57</td><td>1.3-1.8</td><td><span class="pill pill-ok">OK</span></td></tr>
+          <tr class="flagged"><td><strong>Albumin</strong></td><td><strong>39.9</strong></td><td>40.2-47.6</td><td><span class="pill pill-warn">Niedrig</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#129440; Darmflora <span class="pill pill-bad" style="margin-left:6px">3 kritisch</span></h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <table class="lab-table">
+        <thead><tr><th>Wert</th><th>Erg.</th><th>Ref.</th><th></th></tr></thead>
+        <tbody>
+          <tr class="critical"><td><strong>E. coli (gute)</strong></td><td><strong>&lt;10&#8308;</strong></td><td>10&#8310;-10&#8311;</td><td><span class="pill pill-bad">Fehlen</span></td></tr>
+          <tr class="critical"><td><strong>E. coli lakt-neg.</strong></td><td><strong>3&middot;10&#8311;</strong></td><td>&lt;10&#8310;</td><td><span class="pill pill-bad">Zu viel</span></td></tr>
+          <tr><td>Bifidobakterien</td><td>9&middot;10&#8313;</td><td>10&#8312;-10&#185;&#8304;</td><td><span class="pill pill-ok">OK</span></td></tr>
+          <tr><td>Laktobazillen</td><td>1&middot;10&#8311;</td><td>10&#8309;-10&#8311;</td><td><span class="pill pill-ok">OK</span></td></tr>
+          <tr class="flagged"><td><strong>Candida</strong></td><td><strong>1&middot;10&#8308;</strong></td><td>&lt;10&sup3;</td><td><span class="pill pill-warn">Erh&ouml;ht</span></td></tr>
+          <tr class="critical"><td><strong>Stuhl-pH</strong></td><td><strong>7.5</strong></td><td>6-7</td><td><span class="pill pill-bad">Basisch</span></td></tr>
+          <tr class="critical"><td><strong>&Ouml;kobilanz</strong></td><td><strong>10</strong></td><td>0</td><td><span class="pill pill-bad">Gest&ouml;rt</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc" onclick="toggleAcc(this)">
+    <div class="acc-head">
+      <h3>&#127927; Allergie-Tests</h3>
+      <span class="acc-arrow">&#9660;</span>
+    </div>
+    <div class="acc-body">
+      <p class="text-sm fw-600 mb-8">Epikutantest (28.10.2025)</p>
+      <p class="text-sm text-muted mb-8">Perubalsam: <span class="pill pill-warn">positiv</span><br>Sorbitsesquioleat: <span class="pill pill-bad">stark positiv (++)</span></p>
+      <div class="divider"></div>
+      <p class="text-sm fw-600 mb-8">Lymphozyten-Test (02.10.2025)</p>
+      <p class="text-sm text-muted mb-8">Nickel: <span class="pill pill-warn">SI 2.7 &mdash; grenzwertig</span><br>Chrom: <span class="pill pill-ok">SI 1.1 &mdash; unauff&auml;llig</span></p>
+      <div class="divider"></div>
+      <p class="text-sm fw-600 mb-8">Schilddr&uuml;sen-Antik&ouml;rper</p>
+      <p class="text-sm text-muted">Alle negativ <span class="pill pill-ok">Kein Hashimoto</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== BOTTOM NAV ======================== -->
+<nav class="bottom-nav" id="bottomNav">
+  <button class="nav-item active" data-page="p-home" onclick="goTo('p-home')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Home
+  </button>
+  <button class="nav-item" data-page="p-essen" onclick="goTo('p-essen')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+    Essen
+  </button>
+  <button class="nav-item" data-page="p-darm" onclick="goTo('p-darm')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8m-4-4h8"/></svg>
+    Darm
+  </button>
+  <button class="nav-item" data-page="p-routine" onclick="goTo('p-routine')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    Routine
+  </button>
+  <button class="nav-item" data-page="p-mehr" onclick="toggleMore()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    Mehr
+  </button>
+</nav>
+
+<!-- More Menu -->
+<div id="moreMenu">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+    <button class="more-btn" onclick="goTo('p-haut')"><span style="font-size:20px">&#128400;</span>Hautpflege</button>
+    <button class="more-btn" onclick="goTo('p-stress')"><span style="font-size:20px">&#129720;</span>Stress</button>
+    <button class="more-btn" onclick="goTo('p-supps')"><span style="font-size:20px">&#128138;</span>Supplemente</button>
+    <button class="more-btn" onclick="goTo('p-nogo')"><span style="font-size:20px">&#128683;</span>No-Go's</button>
+    <button class="more-btn" onclick="goTo('p-zeit')"><span style="font-size:20px">&#128200;</span>Zeitplan</button>
+    <button class="more-btn" onclick="goTo('p-labor')"><span style="font-size:20px">&#129656;</span>Laborwerte</button>
+  </div>
+</div>
+
+<script>
+// ===== NAVIGATION =====
+let moreOpen = false;
+
+function goTo(id) {
+  moreOpen = false;
+  document.getElementById('moreMenu').style.display = 'none';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navBtn = document.querySelector('.nav-item[data-page="' + id + '"]');
+  if (navBtn) navBtn.classList.add('active');
+  else document.querySelector('.nav-item[data-page="p-mehr"]').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function toggleMore() {
+  moreOpen = !moreOpen;
+  document.getElementById('moreMenu').style.display = moreOpen ? 'block' : 'none';
+}
+
+document.addEventListener('click', function(e) {
+  if (moreOpen && !e.target.closest('#moreMenu') && !e.target.closest('.nav-item[data-page="p-mehr"]')) {
+    moreOpen = false;
+    document.getElementById('moreMenu').style.display = 'none';
+  }
+});
+
+// ===== ACCORDIONS =====
+function toggleAcc(el) { el.classList.toggle('open'); }
+
+// ===== CHECKLISTS (general) =====
+function toggleCheck(li) { li.classList.toggle('done'); }
+
+// ===== DAILY CHECKLIST =====
+function getDailyKey() {
+  const d = new Date();
+  return 'sc-daily-' + d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+}
+
+function saveDailyProgress() {
+  const items = document.querySelectorAll('[data-key]');
+  const checked = [];
+  items.forEach(function(li) { if (li.classList.contains('done')) checked.push(li.dataset.key); });
+  localStorage.setItem(getDailyKey(), JSON.stringify(checked));
+  updateProgress();
+}
+
+function loadDailyProgress() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(getDailyKey()) || '[]');
+    saved.forEach(function(key) {
+      const el = document.querySelector('[data-key="' + key + '"]');
+      if (el) el.classList.add('done');
+    });
+  } catch(e) {}
+  updateProgress();
+}
+
+function toggleDaily(li) {
+  li.classList.toggle('done');
+  saveDailyProgress();
+}
+
+function resetDaily() {
+  document.querySelectorAll('[data-key]').forEach(function(li) { li.classList.remove('done'); });
+  localStorage.removeItem(getDailyKey());
+  updateProgress();
+}
+
+function updateProgress() {
+  const all = document.querySelectorAll('[data-key]');
+  const done = document.querySelectorAll('[data-key].done');
+  const total = all.length;
+  const count = done.length;
+  const pct = total ? Math.round((count / total) * 100) : 0;
+
+  const circle = document.getElementById('progressCircle');
+  const circumference = 2 * Math.PI * 28;
+  if (circle) circle.style.strokeDashoffset = circumference - (circumference * pct / 100);
+
+  const pctEl = document.getElementById('progressPct');
+  if (pctEl) pctEl.textContent = pct + '%';
+
+  const subEl = document.getElementById('progressSub');
+  if (subEl) {
+    if (pct === 0) subEl.textContent = 'Tippe auf "Routine" um zu starten';
+    else if (pct === 100) subEl.textContent = 'Alles geschafft! Mega!';
+    else subEl.textContent = count + ' von ' + total + ' erledigt';
+  }
+}
+
+// ===== SERVICE WORKER =====
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(function() {});
+}
+
+// ===== INIT =====
+loadDailyProgress();
+</script>
+
+</body>
+</html>
