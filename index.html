@@ -341,9 +341,189 @@ body{
 .text-center{text-align:center}
 .fw-600{font-weight:600}
 
+/* ===== TRACKER ===== */
+.tracker-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.tracker-stat{
+  background:var(--card);border-radius:var(--radius-sm);
+  padding:14px 8px;text-align:center;box-shadow:var(--shadow);
+}
+.tracker-stat .num{
+  font-family:var(--font-head);font-size:24px;font-weight:800;
+  color:var(--primary);line-height:1.1;
+}
+.tracker-stat .num.green{color:var(--green)}
+.tracker-stat .num.coral{color:var(--coral)}
+.tracker-stat .lbl{
+  font-size:10px;color:var(--text3);text-transform:uppercase;
+  letter-spacing:0.4px;font-weight:700;margin-top:6px;
+  font-family:var(--font-head);
+}
+
+.quick-log{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.qlog-btn{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:18px 12px;border-radius:var(--radius-sm);border:none;
+  font-family:var(--font-head);font-size:13px;font-weight:700;
+  cursor:pointer;touch-action:manipulation;transition:transform 0.15s;
+  box-shadow:var(--shadow);letter-spacing:0.3px;
+}
+.qlog-btn:active{transform:scale(0.96)}
+.qlog-btn .icon{font-size:22px;line-height:1}
+.qlog-btn.intake{background:var(--green);color:#fff}
+.qlog-btn.flare{background:var(--coral);color:#fff}
+
+.trigger-row{
+  padding:12px 0;border-bottom:1px solid var(--bg);
+}
+.trigger-row:last-child{border-bottom:none}
+.trigger-top{display:flex;align-items:center;gap:10px}
+.trigger-name{
+  font-family:var(--font-head);font-size:13.5px;font-weight:700;
+  flex:1;color:var(--text);
+}
+.trigger-bar{
+  flex:0 0 90px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;
+}
+.trigger-fill{
+  height:100%;border-radius:4px;
+  background:linear-gradient(90deg,var(--amber),var(--coral));
+  transition:width 0.6s ease;
+}
+.trigger-score{
+  font-family:var(--font-head);font-size:13px;font-weight:800;
+  color:var(--coral);min-width:38px;text-align:right;
+}
+.trigger-meta{
+  font-size:11.5px;color:var(--text3);margin-top:5px;
+}
+
+.log-item{
+  display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--bg);
+  align-items:flex-start;
+}
+.log-item:last-child{border-bottom:none}
+.log-dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:7px;
+}
+.log-dot.intake{background:var(--green);box-shadow:0 0 0 3px var(--green-bg)}
+.log-dot.flare{background:var(--coral);box-shadow:0 0 0 3px var(--coral-bg)}
+.log-content{flex:1;min-width:0}
+.log-name{font-size:13.5px;font-weight:600;color:var(--text);font-family:var(--font-head)}
+.log-meta{font-size:11.5px;color:var(--text3);margin-top:2px;line-height:1.5}
+.log-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.log-tag{
+  font-size:10px;padding:2px 8px;border-radius:100px;
+  background:var(--primary-bg);color:var(--primary);
+  font-family:var(--font-head);font-weight:700;letter-spacing:0.2px;
+}
+.log-del{
+  background:none;border:none;color:var(--text3);font-size:13px;
+  padding:4px 8px;cursor:pointer;flex-shrink:0;
+  touch-action:manipulation;
+}
+.log-del:active{color:var(--coral)}
+
+.empty-state{
+  text-align:center;padding:24px 12px;color:var(--text3);font-size:12.5px;
+  line-height:1.6;
+}
+.empty-state .icon{font-size:28px;margin-bottom:6px;opacity:0.4;display:block}
+
+/* ===== SHEET MODAL ===== */
+.sheet-overlay{
+  display:none;position:fixed;inset:0;z-index:2000;
+  background:rgba(45,42,38,0.5);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  align-items:flex-end;justify-content:center;
+}
+.sheet-overlay.open{display:flex}
+.sheet{
+  background:var(--bg);width:100%;max-width:560px;
+  max-height:92vh;overflow-y:auto;
+  border-radius:24px 24px 0 0;
+  padding:8px 20px calc(env(safe-area-inset-bottom,16px) + 24px);
+  animation:sheetIn 0.28s cubic-bezier(0.4,0,0.2,1);
+  -webkit-overflow-scrolling:touch;
+}
+@keyframes sheetIn{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.sheet-handle{
+  width:42px;height:4px;background:var(--bg3);border-radius:2px;
+  margin:8px auto 14px;
+}
+.sheet-title{
+  font-family:var(--font-head);font-size:22px;font-weight:800;
+  color:var(--primary);letter-spacing:-0.4px;
+}
+.sheet-sub{font-size:13px;color:var(--text2);margin-top:3px;margin-bottom:18px}
+.sheet-label{
+  font-family:var(--font-head);font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.6px;
+  color:var(--text3);margin:16px 0 8px;
+}
+.sheet input[type="text"], .sheet textarea{
+  width:100%;padding:13px 16px;
+  background:var(--card);border:1.5px solid var(--bg3);
+  border-radius:var(--radius-sm);
+  font-family:var(--font-body);font-size:14px;color:var(--text);
+  outline:none;transition:border-color 0.2s;
+}
+.sheet input[type="text"]:focus, .sheet textarea:focus{
+  border-color:var(--primary);
+}
+.sheet textarea{min-height:64px;resize:none;line-height:1.5}
+
+.chip-grid{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  background:var(--card);border:1.5px solid var(--bg3);
+  padding:9px 14px;border-radius:100px;
+  font-family:var(--font-head);font-size:12px;font-weight:600;
+  color:var(--text2);cursor:pointer;touch-action:manipulation;
+  transition:all 0.15s;
+}
+.chip:active{transform:scale(0.95)}
+.chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.chip.coral.active{background:var(--coral);border-color:var(--coral)}
+
+.severity-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.sev-btn{
+  padding:14px 4px;border:1.5px solid var(--bg3);
+  background:var(--card);border-radius:var(--radius-sm);
+  font-family:var(--font-head);font-size:16px;font-weight:800;
+  color:var(--text2);cursor:pointer;touch-action:manipulation;
+  transition:all 0.15s;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+}
+.sev-btn span{font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.3px;margin-top:2px}
+.sev-btn:active{transform:scale(0.95)}
+.sev-btn.active{background:var(--coral);color:#fff;border-color:var(--coral)}
+.sev-btn.active span{color:rgba(255,255,255,0.9)}
+
+.sheet-actions{display:flex;gap:10px;margin-top:24px}
+.sheet-btn{
+  flex:1;padding:15px;border-radius:var(--radius-sm);border:none;
+  font-family:var(--font-head);font-size:14px;font-weight:700;
+  cursor:pointer;touch-action:manipulation;letter-spacing:0.2px;
+  transition:transform 0.15s;
+}
+.sheet-btn:active{transform:scale(0.97)}
+.sheet-btn.primary{background:var(--primary);color:#fff}
+.sheet-btn.cancel{background:var(--card);color:var(--text2);border:1.5px solid var(--bg3)}
+
+.suggest-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.suggest{
+  background:var(--bg2);border:1px solid var(--bg3);
+  padding:7px 12px;border-radius:100px;font-size:11.5px;
+  color:var(--text2);cursor:pointer;font-family:var(--font-body);
+  font-weight:500;touch-action:manipulation;
+}
+.suggest:active{background:var(--primary-bg);color:var(--primary)}
+
 @media(max-width:380px){
   .food-split{grid-template-columns:1fr}
   .page{padding:0 14px}
+  .tracker-stat .num{font-size:21px}
+  .severity-grid{gap:4px}
+  .sev-btn{padding:12px 2px;font-size:15px}
 }
 </style>
 </head>
@@ -1013,6 +1193,161 @@ body{
   </div>
 </div>
 
+<!-- ======================== PAGE: TRACKER ======================== -->
+<div class="page" id="p-tracker">
+  <div class="page-header">
+    <h1>Schub-Tracker</h1>
+    <p>Finde heraus was deine Sch&uuml;be wirklich ausl&ouml;st</p>
+  </div>
+
+  <div class="tracker-stats">
+    <div class="tracker-stat">
+      <div class="num green" id="statStreak">&mdash;</div>
+      <div class="lbl">Tage schubfrei</div>
+    </div>
+    <div class="tracker-stat">
+      <div class="num" id="statIntakes7">0</div>
+      <div class="lbl">Aufnahmen 7T</div>
+    </div>
+    <div class="tracker-stat">
+      <div class="num coral" id="statFlares7">0</div>
+      <div class="lbl">Sch&uuml;be 7T</div>
+    </div>
+  </div>
+
+  <div class="quick-log">
+    <button class="qlog-btn intake" onclick="openIntakeSheet()">
+      <span class="icon">&#43;</span>Aufnahme
+    </button>
+    <button class="qlog-btn flare" onclick="openFlareSheet()">
+      <span class="icon">&#9889;</span>Schub
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon coral">&#127919;</div>
+      <div>
+        <div class="card-title">Top Verd&auml;chtige</div>
+        <div class="card-sub">Tags die h&auml;ufig vor Sch&uuml;ben auftauchten (24h Fenster)</div>
+      </div>
+    </div>
+    <div id="triggerList"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon primary">&#128197;</div>
+      <div>
+        <div class="card-title">Heute</div>
+        <div class="card-sub" id="todayCount">Noch nichts protokolliert</div>
+      </div>
+    </div>
+    <div id="todayList"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">&#128220;</div>
+      <div>
+        <div class="card-title">Verlauf</div>
+        <div class="card-sub">Letzte 14 Tage</div>
+      </div>
+    </div>
+    <div id="historyList"></div>
+  </div>
+
+  <div class="text-center mt-16">
+    <button onclick="trackerExport()" style="
+      background:none;border:1px solid var(--bg3);
+      color:var(--text3);padding:10px 24px;border-radius:100px;
+      font-family:var(--font-head);font-size:13px;font-weight:600;cursor:pointer;
+      touch-action:manipulation;
+    ">Daten exportieren</button>
+  </div>
+</div>
+
+<!-- ======================== TRACKER SHEET ======================== -->
+<div class="sheet-overlay" id="trackerSheet" onclick="closeSheetBackdrop(event)">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+
+    <div id="intakeForm">
+      <h2 class="sheet-title">Aufnahme</h2>
+      <p class="sheet-sub">Was hast du gegessen, getrunken oder aufgetragen?</p>
+
+      <div class="sheet-label">Was?</div>
+      <input type="text" id="intakeName" placeholder="z.B. Tomatensauce, Handcreme XY" autocomplete="off">
+      <div class="suggest-grid" id="intakeSuggestions"></div>
+
+      <div class="sheet-label">Tags &mdash; was ist drin?</div>
+      <div class="chip-grid" id="intakeTags">
+        <button type="button" class="chip" data-tag="nickel">Nickelreich</button>
+        <button type="button" class="chip" data-tag="histamin">Histamin</button>
+        <button type="button" class="chip" data-tag="perubalsam">Perubalsam</button>
+        <button type="button" class="chip" data-tag="zucker">Zucker</button>
+        <button type="button" class="chip" data-tag="weizen">Weizen</button>
+        <button type="button" class="chip" data-tag="milch">Milch</button>
+        <button type="button" class="chip" data-tag="alkohol">Alkohol</button>
+        <button type="button" class="chip" data-tag="koffein">Koffein</button>
+        <button type="button" class="chip" data-tag="kosmetik">Kosmetik</button>
+        <button type="button" class="chip" data-tag="duftstoff">Duftstoff</button>
+        <button type="button" class="chip" data-tag="andere">Andere</button>
+      </div>
+
+      <div class="sheet-label">Notiz (optional)</div>
+      <textarea id="intakeNotes" placeholder="Marke, Menge, Details..."></textarea>
+
+      <div class="sheet-actions">
+        <button class="sheet-btn cancel" onclick="closeTrackerSheet()">Abbrechen</button>
+        <button class="sheet-btn primary" onclick="saveIntake()">Speichern</button>
+      </div>
+    </div>
+
+    <div id="flareForm" style="display:none">
+      <h2 class="sheet-title">Schub eintragen</h2>
+      <p class="sheet-sub">Wo und wie stark gerade?</p>
+
+      <div class="sheet-label">St&auml;rke</div>
+      <div class="severity-grid" id="flareSeverity">
+        <button type="button" class="sev-btn" data-sev="1">1<span>mild</span></button>
+        <button type="button" class="sev-btn" data-sev="2">2<span>leicht</span></button>
+        <button type="button" class="sev-btn" data-sev="3">3<span>mittel</span></button>
+        <button type="button" class="sev-btn" data-sev="4">4<span>stark</span></button>
+        <button type="button" class="sev-btn" data-sev="5">5<span>extrem</span></button>
+      </div>
+
+      <div class="sheet-label">Stelle</div>
+      <div class="chip-grid" id="flareAreas">
+        <button type="button" class="chip coral" data-area="li-hand">Linke Hand</button>
+        <button type="button" class="chip coral" data-area="re-hand">Rechte Hand</button>
+        <button type="button" class="chip coral" data-area="finger">Finger</button>
+        <button type="button" class="chip coral" data-area="handflaeche">Handfl&auml;che</button>
+        <button type="button" class="chip coral" data-area="fuesse">F&uuml;&szlig;e</button>
+        <button type="button" class="chip coral" data-area="andere">Andere</button>
+      </div>
+
+      <div class="sheet-label">Symptome</div>
+      <div class="chip-grid" id="flareSymptoms">
+        <button type="button" class="chip coral" data-sym="juckreiz">Juckreiz</button>
+        <button type="button" class="chip coral" data-sym="blaeschen">Bl&auml;schen</button>
+        <button type="button" class="chip coral" data-sym="roetung">R&ouml;tung</button>
+        <button type="button" class="chip coral" data-sym="schaelen">Sch&auml;len</button>
+        <button type="button" class="chip coral" data-sym="schmerz">Schmerz</button>
+        <button type="button" class="chip coral" data-sym="rissen">Risse</button>
+      </div>
+
+      <div class="sheet-label">Notiz (optional)</div>
+      <textarea id="flareNotes" placeholder="Stress, neues Produkt, besondere Umst&auml;nde..."></textarea>
+
+      <div class="sheet-actions">
+        <button class="sheet-btn cancel" onclick="closeTrackerSheet()">Abbrechen</button>
+        <button class="sheet-btn primary" onclick="saveFlare()">Eintragen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ======================== BOTTOM NAV ======================== -->
 <nav class="bottom-nav" id="bottomNav">
   <button class="nav-item active" data-page="p-home" onclick="goTo('p-home')">
@@ -1023,9 +1358,9 @@ body{
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
     Essen
   </button>
-  <button class="nav-item" data-page="p-darm" onclick="goTo('p-darm')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8m-4-4h8"/></svg>
-    Darm
+  <button class="nav-item" data-page="p-tracker" onclick="goTo('p-tracker')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/><circle cx="20" cy="9" r="1.5" fill="currentColor"/></svg>
+    Tracker
   </button>
   <button class="nav-item" data-page="p-routine" onclick="goTo('p-routine')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -1040,6 +1375,7 @@ body{
 <!-- More Menu -->
 <div id="moreMenu">
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+    <button class="more-btn" onclick="goTo('p-darm')"><span style="font-size:20px">&#129440;</span>Darm</button>
     <button class="more-btn" onclick="goTo('p-haut')"><span style="font-size:20px">&#128400;</span>Hautpflege</button>
     <button class="more-btn" onclick="goTo('p-stress')"><span style="font-size:20px">&#129720;</span>Stress</button>
     <button class="more-btn" onclick="goTo('p-supps')"><span style="font-size:20px">&#128138;</span>Supplemente</button>
@@ -1142,6 +1478,367 @@ function updateProgress() {
   }
 }
 
+// ===== SCHUB-TRACKER =====
+const TRACKER_KEY = 'sc-tracker-v1';
+const FLARE_WINDOW_MS = 24 * 60 * 60 * 1000;
+const TAG_LABELS = {
+  nickel: 'Nickelreich', histamin: 'Histamin', perubalsam: 'Perubalsam',
+  zucker: 'Zucker', weizen: 'Weizen', milch: 'Milch',
+  alkohol: 'Alkohol', koffein: 'Koffein', kosmetik: 'Kosmetik',
+  duftstoff: 'Duftstoff', andere: 'Andere'
+};
+const AREA_LABELS = {
+  'li-hand': 'Linke Hand', 're-hand': 'Rechte Hand', 'finger': 'Finger',
+  'handflaeche': 'Handfl\u00e4che', 'fuesse': 'F\u00fc\u00dfe', 'andere': 'Andere'
+};
+const SYMPTOM_LABELS = {
+  juckreiz: 'Juckreiz', blaeschen: 'Bl\u00e4schen', roetung: 'R\u00f6tung',
+  schaelen: 'Sch\u00e4len', schmerz: 'Schmerz', rissen: 'Risse'
+};
+const SEV_LABELS = ['', 'mild', 'leicht', 'mittel', 'stark', 'extrem'];
+
+function getTracker() {
+  try {
+    return JSON.parse(localStorage.getItem(TRACKER_KEY)) || { intakes: [], flares: [] };
+  } catch(e) {
+    return { intakes: [], flares: [] };
+  }
+}
+
+function saveTracker(state) {
+  localStorage.setItem(TRACKER_KEY, JSON.stringify(state));
+}
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+// ----- Sheet open/close -----
+function openIntakeSheet() {
+  document.getElementById('intakeForm').style.display = 'block';
+  document.getElementById('flareForm').style.display = 'none';
+  document.getElementById('intakeName').value = '';
+  document.getElementById('intakeNotes').value = '';
+  document.querySelectorAll('#intakeTags .chip').forEach(function(c) { c.classList.remove('active'); });
+  renderSuggestions();
+  document.getElementById('trackerSheet').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(function() { document.getElementById('intakeName').focus(); }, 320);
+}
+
+function openFlareSheet() {
+  document.getElementById('intakeForm').style.display = 'none';
+  document.getElementById('flareForm').style.display = 'block';
+  document.getElementById('flareNotes').value = '';
+  document.querySelectorAll('#flareAreas .chip').forEach(function(c) { c.classList.remove('active'); });
+  document.querySelectorAll('#flareSymptoms .chip').forEach(function(c) { c.classList.remove('active'); });
+  document.querySelectorAll('#flareSeverity .sev-btn').forEach(function(c) { c.classList.remove('active'); });
+  document.getElementById('trackerSheet').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTrackerSheet() {
+  document.getElementById('trackerSheet').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeSheetBackdrop(e) {
+  if (e.target.id === 'trackerSheet') closeTrackerSheet();
+}
+
+// ----- Chip / severity toggling (delegated) -----
+document.addEventListener('click', function(e) {
+  const sheet = document.getElementById('trackerSheet');
+  if (!sheet.classList.contains('open')) return;
+
+  const chip = e.target.closest('.chip');
+  if (chip && sheet.contains(chip)) {
+    chip.classList.toggle('active');
+    return;
+  }
+  const sev = e.target.closest('.sev-btn');
+  if (sev && sheet.contains(sev)) {
+    sev.parentElement.querySelectorAll('.sev-btn').forEach(function(s) { s.classList.remove('active'); });
+    sev.classList.add('active');
+    return;
+  }
+  const sug = e.target.closest('.suggest');
+  if (sug && sheet.contains(sug)) {
+    useSuggestion(sug.dataset.id);
+  }
+});
+
+// ----- Save -----
+function saveIntake() {
+  const name = document.getElementById('intakeName').value.trim();
+  if (!name) {
+    document.getElementById('intakeName').focus();
+    return;
+  }
+  const tags = Array.from(document.querySelectorAll('#intakeTags .chip.active')).map(function(c) { return c.dataset.tag; });
+  const notes = document.getElementById('intakeNotes').value.trim();
+
+  const state = getTracker();
+  state.intakes.push({
+    id: 'i' + Date.now(),
+    ts: Date.now(),
+    name: name,
+    tags: tags,
+    notes: notes
+  });
+  saveTracker(state);
+  closeTrackerSheet();
+  renderTracker();
+}
+
+function saveFlare() {
+  const sevEl = document.querySelector('#flareSeverity .sev-btn.active');
+  if (!sevEl) {
+    document.querySelector('#flareSeverity').scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  const severity = parseInt(sevEl.dataset.sev, 10);
+  const areas = Array.from(document.querySelectorAll('#flareAreas .chip.active')).map(function(c) { return c.dataset.area; });
+  const symptoms = Array.from(document.querySelectorAll('#flareSymptoms .chip.active')).map(function(c) { return c.dataset.sym; });
+  const notes = document.getElementById('flareNotes').value.trim();
+
+  const state = getTracker();
+  state.flares.push({
+    id: 'f' + Date.now(),
+    ts: Date.now(),
+    severity: severity,
+    areas: areas,
+    symptoms: symptoms,
+    notes: notes
+  });
+  saveTracker(state);
+  closeTrackerSheet();
+  renderTracker();
+}
+
+function deleteEntry(id) {
+  if (!confirm('Eintrag l\u00f6schen?')) return;
+  const state = getTracker();
+  state.intakes = state.intakes.filter(function(i) { return i.id !== id; });
+  state.flares = state.flares.filter(function(f) { return f.id !== id; });
+  saveTracker(state);
+  renderTracker();
+}
+
+// ----- Suggestions (recent unique intakes) -----
+function renderSuggestions() {
+  const state = getTracker();
+  const seen = {};
+  const out = [];
+  for (let i = state.intakes.length - 1; i >= 0 && out.length < 6; i--) {
+    const n = state.intakes[i].name.toLowerCase();
+    if (!seen[n]) {
+      seen[n] = true;
+      out.push(state.intakes[i]);
+    }
+  }
+  const container = document.getElementById('intakeSuggestions');
+  container.innerHTML = out.map(function(s) {
+    return '<button type="button" class="suggest" data-id="' + s.id + '">' + escapeHtml(s.name) + '</button>';
+  }).join('');
+}
+
+function useSuggestion(id) {
+  const state = getTracker();
+  const intake = state.intakes.find(function(i) { return i.id === id; });
+  if (!intake) return;
+  document.getElementById('intakeName').value = intake.name;
+  document.querySelectorAll('#intakeTags .chip').forEach(function(c) {
+    c.classList.toggle('active', intake.tags.indexOf(c.dataset.tag) !== -1);
+  });
+}
+
+// ----- Render -----
+function renderTracker() {
+  const state = getTracker();
+  const now = Date.now();
+  const day = 24 * 60 * 60 * 1000;
+  const week = 7 * day;
+
+  // Streak
+  let streak = '\u2014';
+  if (state.flares.length === 0) {
+    if (state.intakes.length > 0) {
+      const earliest = Math.min.apply(null, state.intakes.map(function(i) { return i.ts; }));
+      streak = Math.floor((now - earliest) / day);
+    }
+  } else {
+    const lastFlare = Math.max.apply(null, state.flares.map(function(f) { return f.ts; }));
+    streak = Math.floor((now - lastFlare) / day);
+  }
+  document.getElementById('statStreak').textContent = streak;
+  document.getElementById('statIntakes7').textContent = state.intakes.filter(function(i) { return now - i.ts < week; }).length;
+  document.getElementById('statFlares7').textContent = state.flares.filter(function(f) { return now - f.ts < week; }).length;
+
+  renderTriggers();
+  renderToday();
+  renderHistory();
+}
+
+function renderTriggers() {
+  const state = getTracker();
+  const tagStats = {};
+
+  state.intakes.forEach(function(intake) {
+    const followingFlare = state.flares.find(function(f) {
+      return f.ts > intake.ts && f.ts - intake.ts < FLARE_WINDOW_MS;
+    });
+    intake.tags.forEach(function(tag) {
+      if (!tagStats[tag]) tagStats[tag] = { intakes: 0, suspected: 0 };
+      tagStats[tag].intakes++;
+      if (followingFlare) tagStats[tag].suspected++;
+    });
+  });
+
+  const triggers = Object.keys(tagStats)
+    .filter(function(tag) { return tagStats[tag].intakes >= 3; })
+    .map(function(tag) {
+      const s = tagStats[tag];
+      return {
+        tag: tag,
+        intakes: s.intakes,
+        suspected: s.suspected,
+        score: Math.round((s.suspected / s.intakes) * 100)
+      };
+    })
+    .sort(function(a, b) { return b.score - a.score; })
+    .slice(0, 6);
+
+  const container = document.getElementById('triggerList');
+  if (triggers.length === 0) {
+    container.innerHTML =
+      '<div class="empty-state"><span class="icon">&#128269;</span>' +
+      'Logge mindestens 3 Aufnahmen pro Tag (mit Tags) und mindestens einen Schub. ' +
+      'Dann analysiere ich automatisch was dich triggert.</div>';
+    return;
+  }
+
+  container.innerHTML = triggers.map(function(t) {
+    return '<div class="trigger-row">' +
+      '<div class="trigger-top">' +
+        '<span class="trigger-name">' + (TAG_LABELS[t.tag] || t.tag) + '</span>' +
+        '<div class="trigger-bar"><div class="trigger-fill" style="width:' + t.score + '%"></div></div>' +
+        '<span class="trigger-score">' + t.score + '%</span>' +
+      '</div>' +
+      '<div class="trigger-meta">' + t.suspected + ' von ' + t.intakes + ' Aufnahmen wurden innerhalb 24h von einem Schub gefolgt</div>' +
+    '</div>';
+  }).join('');
+}
+
+function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+
+function formatTime(ts) {
+  const d = new Date(ts);
+  return pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+}
+
+function formatDate(ts) {
+  const d = new Date(ts);
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const that = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  const diffDays = Math.round((today - that) / (24*60*60*1000));
+  if (diffDays === 0) return 'Heute';
+  if (diffDays === 1) return 'Gestern';
+  if (diffDays < 7) return 'vor ' + diffDays + ' Tagen';
+  return d.getDate() + '.' + (d.getMonth()+1) + '.';
+}
+
+function isToday(ts) {
+  const d = new Date(ts);
+  const n = new Date();
+  return d.getDate() === n.getDate() && d.getMonth() === n.getMonth() && d.getFullYear() === n.getFullYear();
+}
+
+function renderToday() {
+  const state = getTracker();
+  const items = []
+    .concat(state.intakes.filter(function(i) { return isToday(i.ts); }).map(function(i) { var x = Object.assign({}, i); x._type = 'intake'; return x; }))
+    .concat(state.flares.filter(function(f) { return isToday(f.ts); }).map(function(f) { var x = Object.assign({}, f); x._type = 'flare'; return x; }))
+    .sort(function(a, b) { return b.ts - a.ts; });
+
+  const subEl = document.getElementById('todayCount');
+  const container = document.getElementById('todayList');
+
+  if (items.length === 0) {
+    subEl.textContent = 'Noch nichts protokolliert';
+    container.innerHTML = '<div class="empty-state"><span class="icon">&#128221;</span>Tippe oben auf &bdquo;Aufnahme&ldquo; oder &bdquo;Schub&ldquo;</div>';
+    return;
+  }
+
+  subEl.textContent = items.length + ' Eintr\u00e4ge';
+  container.innerHTML = items.map(function(it) { return renderLogItem(it, false); }).join('');
+}
+
+function renderHistory() {
+  const state = getTracker();
+  const cutoff = Date.now() - 14 * 24 * 60 * 60 * 1000;
+  const items = []
+    .concat(state.intakes.filter(function(i) { return i.ts >= cutoff && !isToday(i.ts); }).map(function(i) { var x = Object.assign({}, i); x._type = 'intake'; return x; }))
+    .concat(state.flares.filter(function(f) { return f.ts >= cutoff && !isToday(f.ts); }).map(function(f) { var x = Object.assign({}, f); x._type = 'flare'; return x; }))
+    .sort(function(a, b) { return b.ts - a.ts; });
+
+  const container = document.getElementById('historyList');
+  if (items.length === 0) {
+    container.innerHTML = '<div class="empty-state"><span class="icon">&#128235;</span>Keine \u00e4lteren Eintr\u00e4ge</div>';
+    return;
+  }
+  container.innerHTML = items.slice(0, 60).map(function(it) { return renderLogItem(it, true); }).join('');
+}
+
+function renderLogItem(item, showDate) {
+  const dateBit = showDate ? formatDate(item.ts) + ' &middot; ' : '';
+  if (item._type === 'intake') {
+    const tags = (item.tags || []).map(function(t) {
+      return '<span class="log-tag">' + (TAG_LABELS[t] || t) + '</span>';
+    }).join('');
+    return '<div class="log-item">' +
+      '<div class="log-dot intake"></div>' +
+      '<div class="log-content">' +
+        '<div class="log-name">' + escapeHtml(item.name) + '</div>' +
+        '<div class="log-meta">' + dateBit + formatTime(item.ts) + (item.notes ? ' &middot; ' + escapeHtml(item.notes) : '') + '</div>' +
+        (tags ? '<div class="log-tags">' + tags + '</div>' : '') +
+      '</div>' +
+      '<button class="log-del" onclick="deleteEntry(\'' + item.id + '\')" title="L\u00f6schen">&#10005;</button>' +
+    '</div>';
+  } else {
+    const sevText = SEV_LABELS[item.severity] || '';
+    const areas = (item.areas || []).map(function(a) { return AREA_LABELS[a] || a; }).join(', ');
+    const symptoms = (item.symptoms || []).map(function(s) { return SYMPTOM_LABELS[s] || s; }).join(', ');
+    return '<div class="log-item">' +
+      '<div class="log-dot flare"></div>' +
+      '<div class="log-content">' +
+        '<div class="log-name">&#9889; Schub &middot; St\u00e4rke ' + item.severity + '/5 (' + sevText + ')</div>' +
+        '<div class="log-meta">' + dateBit + formatTime(item.ts) + (areas ? ' &middot; ' + escapeHtml(areas) : '') + '</div>' +
+        (symptoms ? '<div class="log-meta">' + escapeHtml(symptoms) + '</div>' : '') +
+        (item.notes ? '<div class="log-meta">' + escapeHtml(item.notes) + '</div>' : '') +
+      '</div>' +
+      '<button class="log-del" onclick="deleteEntry(\'' + item.id + '\')" title="L\u00f6schen">&#10005;</button>' +
+    '</div>';
+  }
+}
+
+function trackerExport() {
+  const state = getTracker();
+  const data = JSON.stringify(state, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'skinclear-tracker-' + new Date().toISOString().slice(0,10) + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+}
+
 // ===== SERVICE WORKER =====
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(function() {});
@@ -1149,6 +1846,7 @@ if ('serviceWorker' in navigator) {
 
 // ===== INIT =====
 loadDailyProgress();
+renderTracker();
 </script>
 
 </body>

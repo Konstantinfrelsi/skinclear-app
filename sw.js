@@ -1,4 +1,4 @@
-const CACHE_NAME = 'skinclear-v1';
+const CACHE_NAME = 'skinclear-v2-tracker';
 const ASSETS = ['/', '/index.html', '/manifest.json'];
 
 self.addEventListener('install', e => {
